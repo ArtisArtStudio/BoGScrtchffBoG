@@ -43,8 +43,8 @@ Scratcher = (function() {
      */
 
     function getEventCoords(ev) {
-        var first, coords = {};
-        var origEv = ev.originalEvent; // get from jQuery
+        let first, coords = {};
+        let origEv = ev.originalEvent; // get from jQuery
     
         if (origEv.changedTouches != undefined) {
             first = origEv.changedTouches[0];
@@ -65,7 +65,7 @@ Scratcher = (function() {
      * @param ev the event
      */
     function getLocalCoords(elem, coords) {
-        var offset = $(elem).offset();
+        let offset = $(elem).offset();
         return {
             'x': coords.pageX - offset.left,
             'y': coords.pageY - offset.top
@@ -136,11 +136,11 @@ Scratcher = (function() {
      * @return the fraction the canvas has been scratched (0.0 -> 1.0)
      */
     Scratcher.prototype.fullAmount = function(stride) {
-        var i, l;
-        var can = this.canvas.draw;
-        var ctx = can.getContext("2d", { willReadFrequently: true });
-        var count, total;
-        var pdata;
+        let i, l;
+        let can = this.canvas.draw;
+        let ctx = can.getContext("2d", { willReadFrequently: true });
+        let count, total;
+        let pdata;
     
         if (!stride || stride < 1) { stride = 1; }
     
@@ -157,17 +157,17 @@ Scratcher = (function() {
                 count++;
             }
         }
-        /* var n = count/total;
+        /* let n = count/total;
         n= (n*100)| 0;
          if (n>30){
             //ctx.clearRect(0, 0, can.width, can.height);
              ctx.fillStyle = '#0'
              ctx.beginPath();
              ctx.fillRect(0,0,can.width,can.height); */
-             //var mainctx = this.canvas.main.getContext('2d');
+             //let mainctx = this.canvas.main.getContext('2d');
          
             
-             //var drawctx = this.canvas.draw.getContext('2d');
+             //let drawctx = this.canvas.draw.getContext('2d');
             //mainctx.globalCompositeOperation = 'source-in';
             //mainctx.drawImage(this.image.back.img, 0, 0,this.image.back.img.width, this.image.back.img.height,0,0,this.canvas.temp.width,this.canvas.temp.height);
             //drawctx.globalCompositeOperation = 'source-over';
@@ -185,8 +185,8 @@ Scratcher = (function() {
      * @param fresh start a new line if true
      */
      Scratcher.prototype.scratchLine = function(x, y, fresh) {
-        var can = this.canvas.draw;
-        var ctx = can.getContext('2d', { willReadFrequently: true });
+        let can = this.canvas.draw;
+        let ctx = can.getContext('2d', { willReadFrequently: true });
         
         //can.getContext("2d", { willReadFrequently: true });
         ctx.lineWidth = 30;
@@ -231,12 +231,12 @@ Scratcher = (function() {
      * if the images are large.
      */
     Scratcher.prototype.recompositeCanvases = function(clear) {
-        var tempctx = this.canvas.temp.getContext('2d');
-        var mainctx = this.canvas.main.getContext('2d');
-        var drawctx = this.canvas.draw.getContext('2d');
-        //var offCanvas = document.createElement('canvas');
-        var w = this.canvas.temp.width;
-        var h =this.canvas.temp.height;
+        let tempctx = this.canvas.temp.getContext('2d');
+        let mainctx = this.canvas.main.getContext('2d');
+        let drawctx = this.canvas.draw.getContext('2d');
+        //let offCanvas = document.createElement('canvas');
+        let w = this.canvas.temp.width;
+        let h =this.canvas.temp.height;
        
         // Step 1: clear the temp
         this.canvas.temp.width = this.canvas.temp.width; // resizing clears
@@ -370,11 +370,11 @@ Scratcher = (function() {
     offCtx.fillStyle = context.fillStyle; // Copy fill style
     offCtx.textAlign = "center";
     offCtx.textBaseline = "top"; 
-    var words = text.split(" ");
-    var currentLine = 0;
-    var idx = 1;
-    var lw = false;
-    var lwcount = 0;
+    let words = text.split(" ");
+    let currentLine = 0;
+    let idx = 1;
+    let lw = false;
+    let lwcount = 0;
 
     for (let index = 0; index < words.length; index++) {
         if (words[index].length > 9) {
@@ -383,9 +383,9 @@ Scratcher = (function() {
     }
 
     while (words.length > 0 && idx <= words.length) {
-        var str = words.slice(0, idx).join(" ");
-        var st = words.slice(idx - 1, idx).join(" ");
-        var w = offCtx.measureText(str).width;
+        let str = words.slice(0, idx).join(" ");
+        let st = words.slice(idx - 1, idx).join(" ");
+        let w = offCtx.measureText(str).width;
 
         if (offCtx.measureText(st).width > fitWidth - (currentLine * Math.pow(indent, 1.55)) || (lwcount > 5 && currentLine > 5 && indent > 2)) {
             this.containslongw = true;
@@ -419,7 +419,7 @@ Scratcher = (function() {
      * Set up the main canvas and listeners
      */
     Scratcher.prototype._setupCanvases = function() {
-        var c = this.canvas.main;
+        let c = this.canvas.main;
     
         // create the temp and draw canvases, and set their dimensions
         // to the same as the main canvas:
@@ -435,7 +435,7 @@ Scratcher = (function() {
          */
         function mousedown_handler(e) {
             if (this.triggered) {return;}
-            var local = getLocalCoords(c, getEventCoords(e));
+            let local = getLocalCoords(c, getEventCoords(e));
             this.mouseDown = true;
             this.scratchLine(local.x, local.y, true);
             this.recompositeCanvases(false);
@@ -456,7 +456,7 @@ Scratcher = (function() {
 
             if (!this.mouseDown) { return true; }
     
-            var local = getLocalCoords(c, getEventCoords(e));
+            let local = getLocalCoords(c, getEventCoords(e));
     
             this.scratchLine(local.x, local.y, false);
             this.recompositeCanvases(false);
@@ -514,12 +514,12 @@ Scratcher = (function() {
         this.recompositeCanvases(true);
     }
     Scratcher.prototype.resetnoclear = async function(clear) {
-        var c = this.canvas.main;
-        var cc = this.canvas.temp;
+        let c = this.canvas.main;
+        let cc = this.canvas.temp;
         const resizeWidth = c.width >> 0
         const resizeHeight = c.height >> 0
        
-        var ratio=1;
+        let ratio=1;
         
         if (this.pixels && !clear){
             
@@ -536,21 +536,21 @@ Scratcher = (function() {
             this.canvas.temp.width  = this.canvas.draw.width = c.width;
             this.canvas.temp.height = this.canvas.draw.height = c.height;
 
-            var ctx = this.canvas.draw.getContext('2d');
+            let ctx = this.canvas.draw.getContext('2d');
          
             ctx.drawImage(ibm,0,0);
             this.pixels = ctx.getImageData(0,0,c.width,c.height); */
-            var newCanvas = $("<canvas>")
+            let newCanvas = $("<canvas>")
             .attr("width", cc.width)
             .attr("height", cc.height)[0];
 
             newCanvas.getContext("2d").putImageData(this.pixels, 0, 0);
 
             // Second canvas, for scaling
-            var scaleCanvas = $("<canvas>")
+            let scaleCanvas = $("<canvas>")
             .attr("width", c.width)
             .attr("height", c.height)[0];
-            var scaleCtx = scaleCanvas.getContext("2d");
+            let scaleCtx = scaleCanvas.getContext("2d");
             ratio = c.width / cc.width;
 
             scaleCtx.scale(ratio, ratio);
@@ -560,7 +560,7 @@ Scratcher = (function() {
             this.canvas.temp.width  = this.canvas.draw.width = c.width;
             this.canvas.temp.height = this.canvas.draw.height = c.height;
 
-            var ctx = this.canvas.draw.getContext('2d');
+            let ctx = this.canvas.draw.getContext('2d');
             ctx.putImageData(this.pixels, 0, 0);
 
 
@@ -584,7 +584,7 @@ Scratcher = (function() {
      * Dispatches the 'imagesloaded' event
      */
     Scratcher.prototype._loadImages = function() {
-        var loadCount = 0;
+        let loadCount = 0;
     
         // callback for when the images get loaded
         function imageLoaded(e) {
@@ -611,7 +611,7 @@ Scratcher = (function() {
      * Note: not at all a real DOM event
      */
     Scratcher.prototype.createEvent = function(type) {
-        var ev = {
+        let ev = {
             'type': type,
             'target': this,
             'currentTarget': this
@@ -624,7 +624,7 @@ Scratcher = (function() {
      * Add an event listener
      */
     Scratcher.prototype.addEventListener = function(type, handler) {
-        var el = this._eventListeners;
+        let el = this._eventListeners;
     
         type = type.toLowerCase();
     
@@ -641,8 +641,8 @@ Scratcher = (function() {
      * Remove an event listener
      */
     Scratcher.prototype.removeEventListener = function(type, handler) {
-        var el = this._eventListeners;
-        var i;
+        let el = this._eventListeners;
+        let i;
     
         type = type.toLowerCase();
     
@@ -661,9 +661,9 @@ Scratcher = (function() {
      * Dispatch an event
      */
     Scratcher.prototype.dispatchEvent = function(ev) {
-        var el = this._eventListeners;
-        var i, len;
-        var type = ev.type.toLowerCase();
+        let el = this._eventListeners;
+        let i, len;
+        let type = ev.type.toLowerCase();
     
         if (!el.hasOwnProperty(type)) { return; }
     
@@ -692,7 +692,7 @@ Scratcher = (function() {
                 throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
             }
     
-            var aArgs = Array.prototype.slice.call(arguments, 1), 
+            let aArgs = Array.prototype.slice.call(arguments, 1), 
                     fToBind = this, 
                     fNOP = function () {},
                     fBound = function () {

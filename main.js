@@ -4,17 +4,17 @@
  * depends on jQuery>=1.7
  */
 
-var surname;
-var soundHandle = new Audio();
-var triggered=false;
-var nosound=true;
-var params = new URLSearchParams(window.location.search.slice(1));
-var pct1=0, pct2=0, pct3=0;
-var rnd;
+let surname;
+let soundHandle = new Audio();
+let triggered=false;
+let nosound=true;
+let params = new URLSearchParams(window.location.search.slice(1));
+let pct1=0, pct2=0, pct3=0;
+let rnd;
 // locations of correct gender circles
-var loc = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]];
-var pct =[];
-var scratchers = [];
+let loc = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]];
+let pct =[];
+let scratchers = [];
 (function() {
     /**
      * Returns true if this browser supports canvas
@@ -22,26 +22,26 @@ var scratchers = [];
      * From http://diveintohtml5.info/
      */
 
-    var color1 = '#ffc0cb';
-    var color2 = '#7FB1ED';
-    var color4 ='#969696';
-    var color3 = 'linear-gradient(90deg, rgba(255,192,203,1) 0%, rgba(182,182,242,1) 50%, rgba(127,177,237,1) 100%)';
-    var color3a = '-moz-linear-gradient(90deg, rgba(255,192,203,1) 0%, rgba(182,182,242,1) 50%, rgba(127,177,237,1) 100%)';
-    var color3b = '-webkit-linear-gradient(90deg, rgba(255,192,203,1) 0%, rgba(182,182,242,1) 50%, rgba(127,177,237,1) 100%)';
-    var colortxt1 = '#F860AA';
-    var colortxt2= '#0066FFFF';
-    var colortxt3= '#424242';
+    let color1 = '#ffc0cb';
+    let color2 = '#7FB1ED';
+    let color4 ='#969696';
+    let color3 = 'linear-gradient(90deg, rgba(255,192,203,1) 0%, rgba(182,182,242,1) 50%, rgba(127,177,237,1) 100%)';
+    let color3a = '-moz-linear-gradient(90deg, rgba(255,192,203,1) 0%, rgba(182,182,242,1) 50%, rgba(127,177,237,1) 100%)';
+    let color3b = '-webkit-linear-gradient(90deg, rgba(255,192,203,1) 0%, rgba(182,182,242,1) 50%, rgba(127,177,237,1) 100%)';
+    let colortxt1 = '#F860AA';
+    let colortxt2= '#0066FFFF';
+    let colortxt3= '#424242';
     //Select the background color
-    var color =color1;
+    let color =color1;
     //Select the text color
-    var colortxt = colortxt1;
-var gendertext1 = "It's Twin Girls!";
-var gendertext2 = "It's Twin Boys!";
-var gendertext3= "It's";
-var gendertext4= "It is a Demo!";
+    let colortxt = colortxt1;
+let gendertext1 = "It's Twin Girls!";
+let gendertext2 = "It's Twin Boys!";
+let gendertext3= "It's";
+let gendertext4= "It is a Demo!";
 
     //Select the gender text
-    var gendertext = gendertext1;
+    let gendertext = gendertext1;
 
     function supportsCanvas() {
         return !!document.createElement('canvas').getContext;
@@ -52,10 +52,10 @@ var gendertext4= "It is a Demo!";
      * Handle scratch event on a scratcher
      */
     function checkpct(index) {
-        var p = 15;
-        var pct1 = pct[loc[rnd-1][0]-1];
-        var pct2 = pct[loc[rnd-1][1]-1];
-        var pct3 = pct[loc[rnd-1][2]-1];
+        let p = 25;
+        let pct1 = pct[loc[rnd-1][0]-1];
+        let pct2 = pct[loc[rnd-1][1]-1];
+        let pct3 = pct[loc[rnd-1][2]-1];
 
         if (!triggered) {
             if (index == loc[rnd-1][0]||index == loc[rnd-1][1]||index ==loc[rnd-1][2]){
@@ -115,7 +115,7 @@ var gendertext4= "It is a Demo!";
     function scratcher3Changed(ev) {
         // Test every pixel. Very accurate, but might be slow on large
         // canvases on underpowered devices:
-        //var pct = (scratcher.fullAmount() * 100)|0;
+        //let pct = (scratcher.fullAmount() * 100)|0;
     
         // Only test every 32nd pixel. 32x faster, but might lead to
         // inaccuracy:
@@ -165,15 +165,15 @@ var gendertext4= "It is a Demo!";
         triggered = true;
         // do this for 10 seconds
     // Get the center of scratchers[2]
-    var duration = 7 * 1000;
-    var end = Date.now() + duration;
-    var defaults = { startVelocity: 10, spread: 360, ticks: 70, zIndex: 0 };
-    var particleCount = 5 ;
-    for (var i = 1; i < 4; i++) {
-            var scratcherCanvas = document.getElementById('scratcher'+loc[rnd-1][i-1]); // scratchers[2] corresponds to 'scratcher3'
-            var rect = scratcherCanvas.getBoundingClientRect();
-            var centerX = (rect.left + rect.right) / 2 / window.innerWidth;
-            var centerY = (rect.top + rect.bottom) / 2 / window.innerHeight;
+    let duration = 7 * 1000;
+    let end = Date.now() + duration;
+    let defaults = { startVelocity: 10, spread: 360, ticks: 70, zIndex: 0 };
+    let particleCount = 5 ;
+    for (let i = 1; i < 4; i++) {
+            let scratcherCanvas = document.getElementById('scratcher'+loc[rnd-1][i-1]); // scratchers[2] corresponds to 'scratcher3'
+            let rect = scratcherCanvas.getBoundingClientRect();
+            let centerX = (rect.left + rect.right) / 2 / window.innerWidth;
+            let centerY = (rect.top + rect.bottom) / 2 / window.innerHeight;
                 confetti({
                     particleCount: 100,
                     spread: 360,
@@ -208,7 +208,7 @@ var gendertext4= "It is a Demo!";
      * Reset all scratchers
      */
     function onResetClicked(scratchers) {
-        var i;
+        let i;
         pct = [];
         CrispyToast.toasts=[];
         $("#resetbutton").hide();
@@ -242,10 +242,10 @@ var gendertext4= "It is a Demo!";
     
     
     function initPage() {
-        var scratcherLoadedCount = 0;
+        let scratcherLoadedCount = 0;
         pct =new Array(9);
         scratchers = new Array(9);
-        var i, i1;
+        let i, i1;
  
         surname = params.get('surname');
         if (surname !=null && surname.replace(/\s/g, '').length) {
@@ -315,7 +315,6 @@ var gendertext4= "It is a Demo!";
         if (rnd>8) {
             rnd=8;   
         }
-        rnd=1;
         for (i = 0; i < scratchers.length; i++) {
             i1 = i + 1;
             scratchers[i] = new Scratcher('scratcher' + i1);
@@ -345,7 +344,7 @@ var gendertext4= "It is a Demo!";
         scratchers[7].addEventListener('scratchesended', scratcher8Changed);
         scratchers[8].addEventListener('scratchesended', scratcher9Changed);
 
-        var canvas = document.getElementById('scratcher1');
+        let canvas = document.getElementById('scratcher1');
         canvas.onmousemove = null;
         // Or if you didn't want to do it every scratch (to save CPU), you
         // can just do it on 'scratchesended' instead of 'scratch':

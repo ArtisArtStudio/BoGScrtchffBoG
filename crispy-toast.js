@@ -1,12 +1,12 @@
 // crispy-toast.js
 
-var CrispyToast = {};
-var Timer;
+let CrispyToast = {};
+let Timer;
 CrispyToast.toasts = [];
 
 CrispyToast.createToast = function(message, options) {
   options = options || {};
-  var toast = {
+  let toast = {
     message: message,
     type: options.type || 'message',
     position: options.position || 'top-right',
@@ -21,7 +21,7 @@ CrispyToast.clearall = function() {
   /* if (Timer !=null) {
     return true;
   } */
-  var toastElements = document.querySelectorAll('.crispy-toast');
+  let toastElements = document.querySelectorAll('.crispy-toast');
   if (toastElements.length > 0) {
     toastElements.forEach(function(element) {
       document.body.removeChild(element);
@@ -32,10 +32,10 @@ CrispyToast.getType = function(toast) {
   return toast.type;
 }
 CrispyToast.renderToast = function(toast) {
-  var toastContainer = document.createElement('div');
+  let toastContainer = document.createElement('div');
   toastContainer.className = 'crispy-toast ' + toast.type + ' ' + toast.position;
   // Create an element for the message
-  var messageElement = document.createElement('span');
+  let messageElement = document.createElement('span');
   messageElement.className = 'toast-message';
   messageElement.textContent = toast.message;
 
@@ -52,12 +52,12 @@ CrispyToast.renderToast = function(toast) {
 
 
 CrispyToast.removeToast = function(toast) {
-  var index = CrispyToast.toasts.indexOf(toast);
+  let index = CrispyToast.toasts.indexOf(toast);
   if (index !== -1) {
     CrispyToast.toasts.splice(index, 1);
   }
 
-  var toastElements = document.querySelectorAll('.crispy-toast.' + toast.position);
+  let toastElements = document.querySelectorAll('.crispy-toast.' + toast.position);
   if (toastElements.length > 0) {
     toastElements.forEach(function(element) {
       document.body.removeChild(element);
