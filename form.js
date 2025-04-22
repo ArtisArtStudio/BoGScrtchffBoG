@@ -1,7 +1,7 @@
 (window.onload = function() {
 let inputLtc = document.getElementById("Surname");
 //let sharebtn = document.getElementById("sharebtn");
-let add = "https://artisartstudio.github.io/EstrBorGScrtch/index.html?surname="
+let add = "https://artisartstudio.github.io/BoGScrtchffBoG/index.html?surname="
 inputLtc.addEventListener('keyup',OnKeyUp);
 let inputBtc = document.getElementById("address");
 inputBtc.textContent = add;
